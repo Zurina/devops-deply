@@ -4,7 +4,6 @@
       ansible.builtin.copy:
         src: devops
         dest: /home/vagrant/devops
-        # mode: "0777"
 
     - name: create simple service template
       become: true
