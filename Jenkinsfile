@@ -1,18 +1,17 @@
-#!/usr/bin/env groovy
-
 pipeline {
-    agent any
+  agent any
 
-    stages {
-        stage('Copy Artifact') {                
-            steps {      
-                copyArtifact filter: 'devops'
-            }            
-        }
-        stage('Deliver') {                
-            steps {      
-                sh 'scp ./devops vagrant@10.10.50.3'
-            }            
-        }
+  stages {
+    stage('Copy artifact') {
+      steps {
+        copyArtifacts filter: 'sample', fingerprintArtifacts: true, projectName: 'sample', selector: lastSuccessful()
+      }
     }
+    stage('Deploy') {
+      steps {
+        sh 'scp ./sample vagrant@10.10.50.3:'
+      }
+    }
+
+  }
 }
