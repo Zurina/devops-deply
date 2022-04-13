@@ -6,14 +6,14 @@ pipeline {
       steps {
         copyArtifacts filter: 'sample',
         fingerprintArtifacts: true,
-        projectName: 'sample',
+        projectName: 'devops',
         selector: lastSuccessful()
       }
     }
     stage('Deploy') {
       steps {
-        withCredentials([sshUserPrivateKey(credentialsId: "vagrant-private-key", keyFileVariable: 'keyfile')]) {
-            sh 'scp -o "StrictHostKeyChecking=no" -i ${keyfile} ./sample vagrant@10.10.50.3:'
+        withCredentials([sshUserPrivateKey(credentialsId: "vagrant-pkey", keyFileVariable: 'keyfile')]) {
+            sh 'scp -o "StrictHostKeyChecking=no" -i ${keyfile} ./devops vagrant@10.10.50.3:'
         }
       }
     }
