@@ -6,7 +6,7 @@ pipeline {
       steps {
         copyArtifacts filter: 'devops',
         fingerprintArtifacts: true,
-        projectName: 'devops/mathias',
+        projectName: 'devops-test-project/mathias',
         selector: lastSuccessful()
       }
     }
