@@ -1,0 +1,11 @@
+[Unit]
+Description=Go Application
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/home/vagrant/devops
+PIDFile=/var/run/devops
+
+[Install]
+WantedBy=default.target
