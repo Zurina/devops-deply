@@ -9,7 +9,9 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-        sh 'scp ./sample vagrant@10.10.50.3:'
+        withCredentials([sshUserPrivateKey(credentialsId: "vagrant-private-key", keyFileVariable: 'keyfile')]) {
+            sh 'scp -o "StrictHostKeyChecking=no" -i ${keyfile} ./sample vagrant@10.10.50.3:'
+        }
       }
     }
 
