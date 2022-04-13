@@ -1,17 +1,17 @@
 - hosts: target
   tasks:
-    - name: copy artifact
+    - name: Copy artifact
       ansible.builtin.copy:
         src: devops
         dest: /home/vagrant/devops
 
-    - name: create simple service template
+    - name: Service template
       become: true
       template:
         src: devops.service.j2
         dest: /etc/systemd/system/devops.service
 
-    - name: run devops service
+    - name: Run devops with systemd
       become: true
       ansible.builtin.systemd:
         state: started
