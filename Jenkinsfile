@@ -3,6 +3,7 @@ pipeline {
 
   parameters {
     choice choices: ['qa', 'prod'], description: 'Select environment for deployment', name: 'DEPLOY_TO'
+    string(name: 'BRANCH', defaultValue: 'main', description: 'Branch to copy artifact from')
   }
 
   stages {
@@ -10,7 +11,7 @@ pipeline {
       steps {
         copyArtifacts filter: 'devops',
         fingerprintArtifacts: true,
-        projectName: 'devops-test-project/mathias',
+        projectName: 'devops-test-project/${BRANCH}',
         selector: lastSuccessful()
       }
     }
