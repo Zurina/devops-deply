@@ -3,9 +3,7 @@ pipeline {
 
   parameters {
     choice choices: ['qa', 'prod'], description: 'Select environment for deployment', name: 'DEPLOY_TO'
-    string(name: 'branch',
-          defaultValue: 'main',
-          description: 'branch to copy artifact from'
+    string(name: 'branch', defaultValue: 'main', description: 'branch to copy artifact from'
     )
   }
 
@@ -14,8 +12,8 @@ pipeline {
       steps {
         copyArtifacts filter: 'devops',
         fingerprintArtifacts: true,
-        projectName: 'devops-test-project/${params.branch}}',
-        selector: lastSuccessful()
+        projectName: "devops-test-project/${params.branch}",
+        selector: upstream()
       }
     }
     stage('Deploy With Ansible') {
