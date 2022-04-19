@@ -11,7 +11,7 @@ pipeline {
       steps {
         copyArtifacts filter: 'devops',
         fingerprintArtifacts: true,
-        projectName: 'devops-test-project/${BRANCH}',
+        projectName: 'devops-test-project/${params.BRANCH}}',
         selector: lastSuccessful()
       }
     }
