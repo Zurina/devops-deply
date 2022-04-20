@@ -25,7 +25,7 @@ pipeline {
     }
     stage('Validate deployment with Newman') {
       steps {
-        sh 'docker run -t postman/newman run https://www.getpostman.com/collections/b276ed088bb40033c483 -e myhost=${host_ip}
+        sh 'docker run -t postman/newman run https://www.getpostman.com/collections/b276ed088bb40033c483 -e myhost=${host_ip}'
       }
     }
   }
