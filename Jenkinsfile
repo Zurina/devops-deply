@@ -3,7 +3,7 @@ pipeline {
 
   parameters {
     choice choices: ['qa', 'prod'], description: 'Select environment for deployment', name: 'DEPLOY_TO'
-    string(name: 'branch', defaultValue: 'main', description: 'branch to copy artifact from')
+    string(name: 'branch', defaultValue: '', description: 'branch to copy artifact from')
     string(name: 'host_ip', defaultValue: '', description: 'Host IP to validate deployment')
   }
 
@@ -23,10 +23,10 @@ pipeline {
         }
       }
     }
-    stage('Validate deployment with Newman') {
-      steps {
-        sh 'docker run -t postman/newman run https://www.getpostman.com/collections/b276ed088bb40033c483'
-      }
-    }
+    // stage('Validate deployment with Newman') {
+    //   steps {
+    //     sh 'docker run -t postman/newman run https://www.getpostman.com/collections/b276ed088bb40033c483'
+    //   }
+    // }
   }
 }
