@@ -23,17 +23,10 @@ pipeline {
         }
       }
     }
-    stage('Check Availability') {
+    stage('Run Healthcheck') {
       steps {             
-          waitUntil {
-              try {         
-                  sh "curl -s --head --request GET ${host_ip}:8080 | grep '200'"
-                  return true
-              } catch (Exception e) {
-                    return false
-              }
-          }
-        }
+          sh "curl -sf ${host_ip}:8080 >/dev/null"
+      }
     }
   }
 }
