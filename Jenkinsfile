@@ -23,19 +23,17 @@ pipeline {
         }
       }
     }
-    timeout(time: 15, unit: 'SECONDS') {
-        stage('Check Availability') {
-          steps {             
-              waitUntil {
-                  try {         
-                      sh "curl -s --head --request GET ${host_ip}:8080 | grep '200'"
-                      return true
-                  } catch (Exception e) {
-                        return false
-                  }
+    stage('Check Availability') {
+      steps {             
+          waitUntil {
+              try {         
+                  sh "curl -s --head --request GET ${host_ip}:8080 | grep '200'"
+                  return true
+              } catch (Exception e) {
+                    return false
               }
-           }
-       }
+          }
+        }
     }
   }
 }
