@@ -23,10 +23,19 @@ pipeline {
         }
       }
     }
-    // stage('Validate deployment with Newman') {
-    //   steps {
-    //     sh 'docker run -t postman/newman run https://www.getpostman.com/collections/b276ed088bb40033c483'
-    //   }
-    // }
+    timeout(time: 15, unit: 'SECONDS') {
+        stage('Check Availability') {
+          steps {             
+              waitUntil {
+                  try {         
+                      sh "curl -s --head --request GET ${host_ip}:8080 | grep '200'"
+                      return true
+                  } catch (Exception e) {
+                        return false
+                  }
+              }
+           }
+       }
+    }
   }
 }
