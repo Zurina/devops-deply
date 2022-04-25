@@ -11,6 +11,10 @@
         src: devops.service.j2
         dest: /etc/systemd/system/devops.service
 
+    - name: This command will change the working directory to somedir/
+      ansible.builtin.shell:
+        cmd: sudo chmod +x devops
+
     - name: Run devops with systemd
       become: true
       ansible.builtin.systemd:
