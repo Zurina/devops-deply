@@ -3,7 +3,7 @@
     - name: Copy artifact
       ansible.builtin.copy:
         src: devops
-        dest: /home/vagrant/devops
+        dest: /home/ubuntu/devops
 
     - name: Service template
       become: true
